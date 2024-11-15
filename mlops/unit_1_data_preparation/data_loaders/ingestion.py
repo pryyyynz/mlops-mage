@@ -1,7 +1,7 @@
 import requests
 from io import BytesIO
 from typing import List
-
+import numpy as np
 import pandas as pd
 
 if 'data_loader' not in globals():
