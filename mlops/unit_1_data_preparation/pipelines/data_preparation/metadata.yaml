@@ -1,0 +1,68 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_source:
+      path: unit_1_data_preparation/data_loaders/ingestion.py
+  downstream_blocks:
+  - ingestion_time_series_bar_chart_h1
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: ingestion
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: ingestion
+cache_block_output_in_memory: false
+callbacks: []
+concurrency_config: {}
+conditionals: []
+created_at: '2024-11-15 14:21:03.615108+00:00'
+data_integration: null
+description: '#data_ingestion #data_cleaning'
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: Data Preparation
+notification_config: {}
+remote_variables_dir: null
+retry_config: {}
+run_pipeline_in_one_process: false
+settings:
+  triggers: null
+spark_config: {}
+tags: []
+type: python
+uuid: data_preparation
+variables_dir: /home/src/mage_data/unit_1_data_preparation
+widgets:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    chart_type: time series bar chart
+    metrics:
+    - aggregation: count
+      column: passenger_count
+    - aggregation: median
+      column: total_amount
+    - aggregation: count
+      column: DOLocationID
+    time_interval: original
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: ingestion_time series bar chart_h1
+  retry_config: null
+  status: executed
+  timeout: null
+  type: chart
+  upstream_blocks:
+  - ingestion
+  uuid: ingestion_time_series_bar_chart_h1
