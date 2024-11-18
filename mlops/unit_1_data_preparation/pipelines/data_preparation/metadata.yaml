@@ -8,6 +8,7 @@ blocks:
   - prepare
   - missing_values_for_ingestion
   - ingestion_pie_chart_g3
+  - ingestion_time_series_bar_chart_u8
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -98,7 +99,7 @@ widgets:
   language: python
   name: prepare_histogram_q8
   retry_config: null
-  status: executed
+  status: failed
   timeout: null
   type: chart
   upstream_blocks:
@@ -119,11 +120,10 @@ widgets:
   language: python
   name: missing values for ingestion
   retry_config: null
-  status: executed
+  status: failed
   timeout: null
   type: chart
-  upstream_blocks:
-  - ingestion
+  upstream_blocks: []
   uuid: missing_values_for_ingestion
 - all_upstream_blocks_executed: true
   color: null
@@ -144,3 +144,21 @@ widgets:
   upstream_blocks:
   - ingestion
   uuid: ingestion_pie_chart_g3
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    chart_type: time series bar chart
+    time_interval: original
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: ingestion_time series bar chart_u8
+  retry_config: null
+  status: executed
+  timeout: null
+  type: chart
+  upstream_blocks:
+  - ingestion
+  uuid: ingestion_time_series_bar_chart_u8

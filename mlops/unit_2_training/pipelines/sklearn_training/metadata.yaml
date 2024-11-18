@@ -5,16 +5,20 @@ blocks:
     file_source:
       path: unit_2_training/global_data_products/training_set.py
     global_data_product:
+      settings:
+        build:
+          partitions: 1
       uuid: training_set
   downstream_blocks:
-  - hyperparameter_tuning/sklearn
+  - training_set_bar_chart_p0
+  - hyperparameter_tuning
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: Training set
-  retry_config: null
-  status: failed
+  name: training set
+  retry_config: {}
+  status: executed
   timeout: null
   type: global_data_product
   upstream_blocks: []
@@ -23,19 +27,19 @@ blocks:
   color: null
   configuration:
     file_source:
-      path: unit_2_training/markdowns/dynamic_block.md
+      path: unit_2_training/markdowns/dyamic_block_info.md
   downstream_blocks: []
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: markdown
-  name: Dynamic block
+  name: Dyamic block info
   retry_config: null
   status: updated
   timeout: null
   type: markdown
   upstream_blocks: []
-  uuid: dynamic_block
+  uuid: dyamic_block_info
 - all_upstream_blocks_executed: true
   color: teal
   configuration:
@@ -43,7 +47,7 @@ blocks:
     file_source:
       path: unit_2_training/custom/load_models.py
   downstream_blocks:
-  - hyperparameter_tuning/sklearn
+  - hyperparameter_tuning
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -55,37 +59,56 @@ blocks:
   type: custom
   upstream_blocks: []
   uuid: load_models
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: null
   configuration:
     file_source:
-      path: unit_2_training/transformers/hyperparameter_tuning/sklearn.py
+      path: unit_2_training/transformers/hyperparameter_tuning.py
+  downstream_blocks:
+  - sklearn
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: Hyperparameter tuning
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - training_set
+  - load_models
+  uuid: hyperparameter_tuning
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_source:
+      path: unit_2_training/data_exporters/sklearn.py
   downstream_blocks: []
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: Hyperparameter tuning/sklearn
+  name: sklearn
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
-  type: transformer
+  type: data_exporter
   upstream_blocks:
-  - load_models
-  - training_set
-  uuid: hyperparameter_tuning/sklearn
+  - hyperparameter_tuning
+  uuid: sklearn
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
 conditionals: []
-created_at: '2024-11-15 16:25:18.991019+00:00'
+created_at: '2024-07-23 15:07:51.088251+00:00'
 data_integration: null
-description: null
+description: sklearn traiining pipeline for unit 2
 executor_config: {}
 executor_count: 1
 executor_type: null
 extensions: {}
-name: sklearn training
+name: sklearn_training
 notification_config: {}
 remote_variables_dir: null
 retry_config: {}
@@ -100,4 +123,26 @@ variables:
   max_evaluations: 50
   random_state: 7
 variables_dir: /home/src/mage_data/unit_2_training
-widgets: []
+widgets:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    chart_style: vertical
+    chart_type: bar chart
+    metrics:
+    - aggregation: median
+      column: remote_blocks
+    x: x
+    y: y
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: training_set_bar chart_p0
+  retry_config: null
+  status: failed
+  timeout: null
+  type: chart
+  upstream_blocks: []
+  uuid: training_set_bar_chart_p0
